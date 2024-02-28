@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-repeat: no-repeat;
+            background-color: #040505;
+            background-position: 100%;
+            background-image:url('./images/qrr.gif') ;
+        }
+        .container {
+            max-width: 700px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .input:focus {
+            border-color: #141618;
+        }
+        .label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: top 0.3s, font-size 0.3s;
+        }
+        .input:focus + .label, .input:valid + .label {
+            top: 0;
+            font-size: 12px;
+            color: #080a0c;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #0b0c0e;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #060607;
+        }
+        .qr-code {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;color: #0c0e0f;">QR Code Generator</h1><br/>
+        <form action="/qr" method="post">
+            <div class="input-group">
+                <input class="input" name="url" type="text" required="">
+                <label class="label">Enter URL or secret message</label>
+            </div>
+            <button type="submit" class="btn">Generate QR code <i class="fas fa-qrcode"></i></button>
+        </form>
+        <div class="qr-code">
+            <% if (response) { %>
+                <img src="<%= response %>" alt="Generated QR Code" />
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
