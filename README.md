@@ -1,0 +1,1 @@
+Output in qrcode.png
